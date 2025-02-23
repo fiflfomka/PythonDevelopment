@@ -150,8 +150,20 @@ def run(func):
         wrap_text=args.N,
         cowfile=get_cowfile(args.F),
     )
-    print(cow1)
-    print(cow2)
+
+    # add spaces in the end of first cow's lines
+    lst1 = cow1.split("\n")
+    max_lst1_len = max([len(elem) for elem in lst1])
+    lst1 = [(elem + " " * (max_lst1_len - len(elem))) for elem in lst1]
+    lst2 = cow2.split("\n")
+    # add dummy lines to cows
+    if len(lst1) < len(lst2):
+        dummy_line = " " * max_lst1_len
+        lst1 = [dummy_line for _ in range(len(lst2) - len(lst1))] + lst1
+    else:
+        lst2 = [""] * (len(lst1) - len(lst2)) + lst2
+
+    print("\n".join(elem[0] + elem[1] for elem in zip(lst1, lst2)))
 
 
 run(cowsay)
