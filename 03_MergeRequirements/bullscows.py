@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser(prog=os.path.basename(
     sys.argv[0]), description="Bulls and cows game")
 parser.add_argument(type=str, dest="dict_file",
                     help="Path or URL of dictionary")
-parser.add_argument(type=int, default=5, dest="wordlen",
+parser.add_argument(type=int, default=5, nargs='?', dest="wordlen",
                     help="what length of words do you want to use")
 
 
