@@ -56,7 +56,7 @@ if __name__ == "__main__":
             data = f.read()
     except Exception as e1:
         try:
-            data = urllib.request.urlopen(args.dict_file).read()
+            data = urllib.request.urlopen(args.dict_file).read().decode("utf-8")
         except Exception as e2:
             print("can't open dictionary:\n", e1, "\n", e2)
             sys.exit(1)
