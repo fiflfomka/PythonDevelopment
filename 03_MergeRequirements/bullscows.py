@@ -15,8 +15,8 @@ parser.add_argument(type=int, default=5, dest="wordlen",
 
 def bullscows(guess: str, answer: str):
     bulls = []
-    for i, guess_i in enumerate(guess):
-        if guess_i == answer[i]:
+    for i in range(min(len(guess), len(answer))):
+        if guess[i] == answer[i]:
             bulls.append(i)
     for i in reversed(bulls):
         guess = guess[:i] + guess[i+1:]
