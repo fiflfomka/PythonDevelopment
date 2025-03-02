@@ -53,14 +53,17 @@ def ask(prompt: str, valid: list[str] = None) -> str:
 def random_cow_print(*args):
     print(cowsay(
         message=" ".join(map(str, args)),
-        cow=random.choice(list_cows()),
+        cow=os.path.abspath(os.path.join(
+            os.path.dirname(__file__), "cowsay_crayfish")),
     ))
+
 
 def random_cow_ask(prompt: str, valid: list[str] = None) -> str:
     while True:
         s = input(cowsay(
             message=prompt,
-            cow=random.choice(list_cows()),
+            cow=os.path.abspath(os.path.join(
+                os.path.dirname(__file__), "cowsay_crayfish")),
         ) + "\n")
         if valid is not None and s not in valid:
             print("Word", s, "not in the dictionary. Try again!")

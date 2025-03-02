@@ -1,0 +1,15 @@
+##
+## The Budweiser frogs
+##
+$the_cow = <<EOC;
+     $thoughts
+      $thoughts
+         /\
+        ( /   @ @    ()
+         \  __| |__  /
+          -/   "   \-
+         /-|       |-\
+        / /-\     /-\ \
+         / /-`---'-\ \
+          /         \
+EOC
