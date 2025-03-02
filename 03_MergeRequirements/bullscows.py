@@ -3,6 +3,7 @@ import sys
 import random
 import argparse
 import urllib.request
+from cowsay import cowsay, list_cows, read_dot_cow
 
 
 parser = argparse.ArgumentParser(prog=os.path.basename(
@@ -49,6 +50,24 @@ def ask(prompt: str, valid: list[str] = None) -> str:
         return s
 
 
+def random_cow_print(*args):
+    print(cowsay(
+        message=" ".join(map(str, args)),
+        cow=random.choice(list_cows()),
+    ))
+
+def random_cow_ask(prompt: str, valid: list[str] = None) -> str:
+    while True:
+        s = input(cowsay(
+            message=prompt,
+            cow=random.choice(list_cows()),
+        ) + "\n")
+        if valid is not None and s not in valid:
+            print("Word", s, "not in the dictionary. Try again!")
+            continue
+        return s
+
+
 if __name__ == "__main__":
     args = parser.parse_args()
     try:
@@ -56,11 +75,12 @@ if __name__ == "__main__":
             data = f.read()
     except Exception as e1:
         try:
-            data = urllib.request.urlopen(args.dict_file).read().decode("utf-8")
+            data = urllib.request.urlopen(
+                args.dict_file).read().decode("utf-8")
         except Exception as e2:
             print("can't open dictionary:\n", e1, "\n", e2)
             sys.exit(1)
     all_words = (p.strip() for p in data.split("\n"))
     good_words = list(filter(lambda x: len(x) == args.wordlen, all_words))
-    res = gameplay(ask, print, good_words)
+    res = gameplay(random_cow_ask, random_cow_print, good_words)
     print(f"You asked {res} times")
